@@ -1,0 +1,44 @@
+{
+  "navigation": {
+    "home": "Home",
+    "profile": "Profile",
+    "dashboard": "Dashboard"
+  },
+  "landing": {
+    "title": "AgriSight",
+    "subtitle": "Smart Agriculture for Modern Farmers",
+    "description": "Get AI-powered insights for better crop yields, pest management, and weather alerts",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More"
+  },
+  "profile": {
+    "title": "Farmer Profile",
+    "subtitle": "Tell us about your farm to get personalized recommendations",
+    "state": "State",
+    "district": "District",
+    "farmSize": "Farm Size (acres)",
+    "soilType": "Soil Type",
+    "irrigation": "Irrigation Type",
+    "languages": "Languages Spoken",
+    "save": "Save Profile",
+    "update": "Update Profile"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "yieldPrediction": "Yield Prediction",
+    "pestDisease": "Pest & Disease Detection",
+    "weatherAlerts": "Weather Alerts",
+    "cropSuggestions": "Crop Suggestions",
+    "fertilizerRecommendations": "Fertilizer Recommendations",
+    "marketPrices": "Market Prices"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "upload": "Upload",
+    "select": "Select",
+    "viewDetails": "View Details"
+  }
+}

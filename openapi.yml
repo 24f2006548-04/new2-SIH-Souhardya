@@ -1,0 +1,878 @@
+openapi: 3.0.3
+info:
+  title: AgriSight API
+  description: Smart Agriculture Platform API for crop management, pest detection, and market insights
+  version: 1.0.0
+  contact:
+    name: AgriSight Team
+    email: support@agrisight.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.agrisight.com
+    description: Production server
+
+paths:
+  /api/v1/yield-prediction:
+    get:
+      summary: Get crop yield predictions
+      description: Retrieve AI-powered yield predictions based on farm conditions
+      tags:
+        - Yield Prediction
+      parameters:
+        - name: crop
+          in: query
+          description: Crop type
+          required: true
+          schema:
+            type: string
+            enum: [tomato, onion, potato, capsicum, brinjal]
+        - name: farm_size
+          in: query
+          description: Farm size in acres
+          required: true
+          schema:
+            type: number
+            minimum: 0.1
+        - name: soil_type
+          in: query
+          description: Soil type
+          required: true
+          schema:
+            type: string
+            enum: [alluvial, black, red, laterite, mountain, desert, saline, peaty]
+        - name: location
+          in: query
+          description: Farm location coordinates
+          required: true
+          schema:
+            type: object
+            properties:
+              lat:
+                type: number
+                format: float
+              lon:
+                type: number
+                format: float
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YieldPredictionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/pest-detection:
+    post:
+      summary: Detect pests and diseases from plant images
+      description: Upload plant images for AI-powered pest and disease detection
+      tags:
+        - Pest Detection
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: Plant image file (JPG, PNG, WebP)
+                crop_type:
+                  type: string
+                  description: Type of crop in the image
+                  enum: [tomato, onion, potato, capsicum, brinjal, okra]
+      responses:
+        '200':
+          description: Successful detection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PestDetectionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/weather:
+    get:
+      summary: Get weather data and alerts
+      description: Retrieve current weather conditions and forecasts
+      tags:
+        - Weather
+      parameters:
+        - name: lat
+          in: query
+          description: Latitude
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: lon
+          in: query
+          description: Longitude
+          required: true
+          schema:
+            type: number
+            format: float
+        - name: days
+          in: query
+          description: Number of forecast days
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 7
+            default: 5
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/crop-suggestions:
+    get:
+      summary: Get crop recommendations
+      description: Get personalized crop suggestions based on farm conditions
+      tags:
+        - Crop Suggestions
+      parameters:
+        - name: location
+          in: query
+          description: Farm location
+          required: true
+          schema:
+            type: object
+            properties:
+              state:
+                type: string
+              district:
+                type: string
+              lat:
+                type: number
+                format: float
+              lon:
+                type: number
+                format: float
+        - name: soil_type
+          in: query
+          description: Soil type
+          required: true
+          schema:
+            type: string
+            enum: [alluvial, black, red, laterite, mountain, desert, saline, peaty]
+        - name: farm_size
+          in: query
+          description: Farm size in acres
+          required: true
+          schema:
+            type: number
+            minimum: 0.1
+        - name: irrigation
+          in: query
+          description: Irrigation type
+          schema:
+            type: string
+            enum: [drip, sprinkler, flood, furrow, center_pivot, manual]
+        - name: season
+          in: query
+          description: Planting season
+          schema:
+            type: string
+            enum: [kharif, rabi, zaid]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CropSuggestionsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/fertilizer-recommendations:
+    get:
+      summary: Get fertilizer recommendations
+      description: Get personalized fertilizer suggestions based on crop and soil conditions
+      tags:
+        - Fertilizer Recommendations
+      parameters:
+        - name: crop
+          in: query
+          description: Crop type
+          required: true
+          schema:
+            type: string
+            enum: [tomato, onion, potato, capsicum, brinjal, okra]
+        - name: soil_type
+          in: query
+          description: Soil type
+          required: true
+          schema:
+            type: string
+            enum: [alluvial, black, red, laterite, mountain, desert, saline, peaty]
+        - name: growth_stage
+          in: query
+          description: Current growth stage
+          schema:
+            type: string
+            enum: [seedling, vegetative, flowering, fruiting, harvesting]
+        - name: farm_size
+          in: query
+          description: Farm size in acres
+          required: true
+          schema:
+            type: number
+            minimum: 0.1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FertilizerRecommendationsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/market-prices:
+    get:
+      summary: Get market prices
+      description: Retrieve current market prices for various crops
+      tags:
+        - Market Prices
+      parameters:
+        - name: crop
+          in: query
+          description: Crop type (optional, returns all if not specified)
+          schema:
+            type: string
+            enum: [tomato, onion, potato, capsicum, brinjal, okra]
+        - name: market
+          in: query
+          description: Market location (optional)
+          schema:
+            type: string
+        - name: days
+          in: query
+          description: Number of historical days
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 30
+            default: 7
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MarketPricesResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    YieldPredictionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        predictions:
+          type: array
+          items:
+            $ref: '#/components/schemas/YieldDataPoint'
+        metadata:
+          $ref: '#/components/schemas/YieldMetadata'
+      required:
+        - success
+        - predictions
+        - metadata
+
+    YieldDataPoint:
+      type: object
+      properties:
+        month:
+          type: string
+        predicted:
+          type: number
+        actual:
+          type: number
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 100
+      required:
+        - month
+        - predicted
+
+    YieldMetadata:
+      type: object
+      properties:
+        crop:
+          type: string
+        variety:
+          type: string
+        farm_size:
+          type: number
+        soil_type:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+      required:
+        - crop
+        - last_updated
+
+    PestDetectionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        detection:
+          $ref: '#/components/schemas/PestDetection'
+        metadata:
+          $ref: '#/components/schemas/DetectionMetadata'
+      required:
+        - success
+        - detection
+        - metadata
+
+    PestDetection:
+      type: object
+      properties:
+        pest:
+          type: string
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 100
+        severity:
+          type: string
+          enum: [low, medium, high]
+        recommendations:
+          type: array
+          items:
+            type: string
+        alternative_pests:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlternativePest'
+      required:
+        - pest
+        - confidence
+        - severity
+        - recommendations
+
+    AlternativePest:
+      type: object
+      properties:
+        name:
+          type: string
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 100
+      required:
+        - name
+        - confidence
+
+    DetectionMetadata:
+      type: object
+      properties:
+        image_processed:
+          type: boolean
+        processing_time:
+          type: string
+        model_version:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+      required:
+        - image_processed
+        - timestamp
+
+    WeatherResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        current:
+          $ref: '#/components/schemas/CurrentWeather'
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherAlert'
+        forecast:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherForecast'
+        location:
+          $ref: '#/components/schemas/Location'
+        last_updated:
+          type: string
+          format: date-time
+      required:
+        - success
+        - current
+        - forecast
+        - last_updated
+
+    CurrentWeather:
+      type: object
+      properties:
+        temperature:
+          type: number
+        humidity:
+          type: number
+          minimum: 0
+          maximum: 100
+        wind_speed:
+          type: number
+        condition:
+          type: string
+        icon:
+          type: string
+        feels_like:
+          type: number
+        uv_index:
+          type: number
+        visibility:
+          type: number
+      required:
+        - temperature
+        - humidity
+        - wind_speed
+        - condition
+
+    WeatherAlert:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [warning, info, danger]
+        title:
+          type: string
+        description:
+          type: string
+        time:
+          type: string
+        severity:
+          type: string
+          enum: [low, moderate, high]
+      required:
+        - id
+        - type
+        - title
+        - description
+
+    WeatherForecast:
+      type: object
+      properties:
+        day:
+          type: string
+        high:
+          type: number
+        low:
+          type: number
+        condition:
+          type: string
+        precipitation:
+          type: number
+          minimum: 0
+          maximum: 100
+        wind_speed:
+          type: number
+      required:
+        - day
+        - high
+        - low
+        - condition
+
+    Location:
+      type: object
+      properties:
+        city:
+          type: string
+        state:
+          type: string
+        coordinates:
+          type: object
+          properties:
+            lat:
+              type: number
+              format: float
+            lon:
+              type: number
+              format: float
+      required:
+        - city
+        - state
+        - coordinates
+
+    CropSuggestionsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        suggestions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CropSuggestion'
+        metadata:
+          $ref: '#/components/schemas/CropMetadata'
+      required:
+        - success
+        - suggestions
+        - metadata
+
+    CropSuggestion:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        variety:
+          type: string
+        suitability:
+          type: number
+          minimum: 0
+          maximum: 100
+        planting_season:
+          type: string
+        expected_yield:
+          type: string
+        market_price:
+          type: number
+        growth_period:
+          type: string
+        water_requirement:
+          type: string
+          enum: [low, medium, high]
+        soil_compatibility:
+          type: array
+          items:
+            type: string
+        benefits:
+          type: array
+          items:
+            type: string
+        challenges:
+          type: array
+          items:
+            type: string
+        investment:
+          type: string
+        profit_potential:
+          type: string
+          enum: [low, medium, high]
+      required:
+        - id
+        - name
+        - variety
+        - suitability
+        - planting_season
+        - expected_yield
+        - market_price
+
+    CropMetadata:
+      type: object
+      properties:
+        location:
+          type: string
+        soil_type:
+          type: string
+        season:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+      required:
+        - location
+        - soil_type
+        - last_updated
+
+    FertilizerRecommendationsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        recommendations:
+          type: array
+          items:
+            $ref: '#/components/schemas/FertilizerRecommendation'
+        metadata:
+          $ref: '#/components/schemas/FertilizerMetadata'
+      required:
+        - success
+        - recommendations
+        - metadata
+
+    FertilizerRecommendation:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum: [organic, inorganic, bio]
+        application_time:
+          type: string
+        quantity:
+          type: string
+        frequency:
+          type: string
+        benefits:
+          type: array
+          items:
+            type: string
+        price:
+          type: number
+        availability:
+          type: string
+          enum: [high, medium, low]
+        soil_compatibility:
+          type: array
+          items:
+            type: string
+        composition:
+          type: string
+        application_method:
+          type: string
+        precautions:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - name
+        - type
+        - application_time
+        - quantity
+        - benefits
+        - price
+
+    FertilizerMetadata:
+      type: object
+      properties:
+        crop:
+          type: string
+        soil_type:
+          type: string
+        season:
+          type: string
+        last_updated:
+          type: string
+          format: date-time
+      required:
+        - crop
+        - soil_type
+        - last_updated
+
+    MarketPricesResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/MarketPrice'
+        metadata:
+          $ref: '#/components/schemas/MarketMetadata'
+      required:
+        - success
+        - prices
+        - metadata
+
+    MarketPrice:
+      type: object
+      properties:
+        id:
+          type: string
+        crop:
+          type: string
+        current_price:
+          type: number
+        previous_price:
+          type: number
+        change:
+          type: number
+        change_percent:
+          type: number
+        unit:
+          type: string
+        market:
+          type: string
+        last_updated:
+          type: string
+        trend:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceTrendPoint'
+        market_details:
+          $ref: '#/components/schemas/MarketDetails'
+      required:
+        - id
+        - crop
+        - current_price
+        - previous_price
+        - change
+        - change_percent
+        - unit
+        - market
+        - last_updated
+
+    PriceTrendPoint:
+      type: object
+      properties:
+        date:
+          type: string
+        price:
+          type: number
+      required:
+        - date
+        - price
+
+    MarketDetails:
+      type: object
+      properties:
+        volume:
+          type: string
+        quality:
+          type: string
+        demand:
+          type: string
+          enum: [low, medium, high]
+      required:
+        - volume
+        - quality
+        - demand
+
+    MarketMetadata:
+      type: object
+      properties:
+        last_updated:
+          type: string
+          format: date-time
+        total_markets:
+          type: integer
+        price_source:
+          type: string
+      required:
+        - last_updated
+        - total_markets
+        - price_source
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          default: false
+        error:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+      required:
+        - success
+        - error
+        - message
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
+
+tags:
+  - name: Yield Prediction
+    description: AI-powered crop yield forecasting
+  - name: Pest Detection
+    description: Image-based pest and disease identification
+  - name: Weather
+    description: Weather monitoring and alerts
+  - name: Crop Suggestions
+    description: Personalized crop recommendations
+  - name: Fertilizer Recommendations
+    description: Smart fertilizer guidance
+  - name: Market Prices
+    description: Real-time market price tracking
