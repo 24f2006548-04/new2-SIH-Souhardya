@@ -5,27 +5,36 @@ import type { ReactElement } from 'react'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import Navigation from '../../components/Navigation'
+import Toast, { useToast } from '../../components/Toast'
 import { Save, User, MapPin, Droplets, Globe } from 'lucide-react'
 
 interface FarmerProfile {
+  id?: string
+  name?: string
+  avatar?: string
   state: string
   district: string
   farmSize: string
   soilType: string
   irrigation: string
   languages: string[]
+  crops?: string[]
+  location?: string
 }
 
 export default function ProfilePage(): ReactElement {
   const { t } = useTranslation()
+  const { toasts, showSuccess, showError, showToastWithHtml } = useToast()
   const [isLoading, setIsLoading] = useState(false)
   const [profile, setProfile] = useState<FarmerProfile>({
+    name: '',
     state: '',
     district: '',
     farmSize: '',
     soilType: '',
     irrigation: '',
-    languages: []
+    languages: [],
+    crops: []
   })
 
   const states = [
@@ -47,7 +56,13 @@ export default function ProfilePage(): ReactElement {
     'Furrow Irrigation', 'Center Pivot', 'Manual Watering'
   ]
 
-  const languages = ['Hindi', 'English', 'Telugu', 'Tamil', 'Bengali', 'Marathi', 'Gujarati', 'Kannada', 'Malayalam', 'Punjabi']
+  const languages = ['Hindi', 'English', 'Odia', 'Telugu', 'Tamil', 'Bengali', 'Marathi', 'Gujarati', 'Kannada', 'Malayalam', 'Punjabi']
+  
+  const commonCrops = [
+    'Rice', 'Wheat', 'Maize', 'Sugarcane', 'Cotton', 'Soybean', 'Groundnut', 'Mustard',
+    'Potato', 'Onion', 'Tomato', 'Chili', 'Turmeric', 'Ginger', 'Coconut', 'Mango',
+    'Banana', 'Apple', 'Grapes', 'Pomegranate', 'Papaya', 'Guava', 'Lemon', 'Orange'
+  ]
 
   const handleInputChange = (field: keyof FarmerProfile, value: string | string[]) => {
     setProfile(prev => ({
@@ -65,18 +80,84 @@ export default function ProfilePage(): ReactElement {
     }))
   }
 
+  const handleCropToggle = (crop: string) => {
+    setProfile(prev => ({
+      ...prev,
+      crops: prev.crops?.includes(crop)
+        ? prev.crops.filter(c => c !== crop)
+        : [...(prev.crops || []), crop]
+    }))
+  }
+
+  const showConciseProfile = (profile: FarmerProfile) => {
+    const html = `
+      <div class="profile-card p-4 rounded shadow bg-white">
+        <div class="flex items-center gap-3">
+          <img src="${profile.avatar || '/assets/default-avatar.png'}" alt="avatar" class="w-12 h-12 rounded-full"/>
+          <div>
+            <div class="font-bold">${profile.name || 'Farmer'}</div>
+            <div class="text-sm text-muted">${profile.location || '—'}</div>
+          </div>
+          <div class="ml-auto text-right">
+            <div class="text-sm">Crops: ${profile.crops?.join(', ') || '—'}</div>
+            <div class="text-sm">Farm size: ${profile.farmSize || '—'} acres</div>
+          </div>
+        </div>
+        <div class="mt-3 flex gap-2">
+          <button class="btn-primary" id="editProfileBtn">Edit</button>
+          <button class="btn-outline" id="closeProfileCardBtn">Close</button>
+        </div>
+      </div>
+    `
+    showToastWithHtml(html, 'Profile Saved Successfully!')
+    
+    // Add event listeners for the buttons in the toast
+    setTimeout(() => {
+      const editBtn = document.getElementById('editProfileBtn')
+      const closeBtn = document.getElementById('closeProfileCardBtn')
+      
+      if (editBtn) {
+        editBtn.addEventListener('click', () => {
+          // Scroll to top of form
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        })
+      }
+      
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          // Close the toast
+          const toastElement = closeBtn.closest('.fixed')
+          if (toastElement) {
+            toastElement.remove()
+          }
+        })
+      }
+    }, 100)
+  }
+
+  const onSaveProfile = async (formData: FarmerProfile) => {
+    const res = await fetch('/api/profile', {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    if (res.ok) {
+      const profile = await res.json()
+      showConciseProfile(profile)
+    } else {
+      showError('Profile save failed')
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      console.log('Profile saved:', profile)
-      alert('Profile saved successfully!')
+      await onSaveProfile(profile)
     } catch (error) {
       console.error('Error saving profile:', error)
-      alert('Error saving profile. Please try again.')
+      showError('Error saving profile. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -111,6 +192,33 @@ export default function ProfilePage(): ReactElement {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
+              className="card"
+            >
+              <div className="flex items-center mb-6">
+                <User className="h-5 w-5 text-primary-600 mr-2" />
+                <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    value={profile.name || ''}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    className="input-field"
+                    placeholder="Enter your name"
+                  />
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
               className="card"
             >
               <div className="flex items-center mb-6">
@@ -227,6 +335,40 @@ export default function ProfilePage(): ReactElement {
               className="card"
             >
               <div className="flex items-center mb-6">
+                <Droplets className="h-5 w-5 text-primary-600 mr-2" />
+                <h2 className="text-xl font-semibold text-gray-900">Crop Selection</h2>
+              </div>
+              
+              <div>
+                <label className="label">
+                  Crops You Grow
+                </label>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                  {commonCrops.map(crop => (
+                    <label key={crop} className="flex items-center space-x-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={profile.crops?.includes(crop) || false}
+                        onChange={() => handleCropToggle(crop)}
+                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                      />
+                      <span className="text-sm text-gray-700">{crop}</span>
+                    </label>
+                  ))}
+                </div>
+                <p className="text-sm text-gray-500 mt-2">
+                  Select all crops you currently grow or plan to grow
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="card"
+            >
+              <div className="flex items-center mb-6">
                 <Globe className="h-5 w-5 text-primary-600 mr-2" />
                 <h2 className="text-xl font-semibold text-gray-900">Language Preferences</h2>
               </div>
@@ -272,6 +414,20 @@ export default function ProfilePage(): ReactElement {
           </form>
         </motion.div>
       </main>
+
+      {/* Toast Notifications */}
+      {toasts.map(toast => (
+        <Toast
+          key={toast.id}
+          id={toast.id}
+          type={toast.type}
+          title={toast.title}
+          message={toast.message}
+          html={toast.html}
+          duration={toast.duration}
+          onClose={toast.onClose}
+        />
+      ))}
     </div>
   )
 }
