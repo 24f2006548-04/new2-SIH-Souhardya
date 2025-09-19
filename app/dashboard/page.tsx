@@ -33,10 +33,10 @@ export default function DashboardPage(): ReactElement {
   }
 
   useEffect(() => {
-    // Simulate loading dashboard data
+    // Simulate loading dashboard data - reduced from 1000ms to 300ms
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 1000)
+    }, 300)
     return () => clearTimeout(timer)
   }, [])
 
@@ -56,46 +56,12 @@ export default function DashboardPage(): ReactElement {
             block: 'center' 
           })
         }
-      }, 1500) // Wait for loading animation to complete
+      }, 500) // Reduced wait time since loading is faster
       
       return () => clearTimeout(scrollTimer)
     }
   }, [])
 
-  useEffect(() => {
-    // Add event listeners for hero buttons
-    const heroCtaBtn = document.getElementById('heroCtaBtn')
-    const learnMoreBtn = document.querySelector('.btn-outline')
-    
-    const handleCtaClick = () => {
-      // Scroll to dashboard grid
-      const dashboardGrid = document.querySelector('.grid')
-      if (dashboardGrid) {
-        dashboardGrid.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-    
-    const handleLearnMoreClick = () => {
-      // Scroll to dashboard grid
-      const dashboardGrid = document.querySelector('.grid')
-      if (dashboardGrid) {
-        dashboardGrid.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-    
-    if (heroCtaBtn) {
-      heroCtaBtn.addEventListener('click', handleCtaClick)
-    }
-    
-    if (learnMoreBtn) {
-      learnMoreBtn.addEventListener('click', handleLearnMoreClick)
-    }
-    
-    return () => {
-      if (heroCtaBtn) heroCtaBtn.removeEventListener('click', handleCtaClick)
-      if (learnMoreBtn) learnMoreBtn.removeEventListener('click', handleLearnMoreClick)
-    }
-  }, [isLoading])
 
   if (isLoading) {
     return (
@@ -114,30 +80,10 @@ export default function DashboardPage(): ReactElement {
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3 }}
         >
-          {/* Hero Section */}
-          <div className="hero relative w-full h-screen flex items-center justify-center text-center rounded-xl mb-8 overflow-hidden">
-            <div 
-              className="absolute inset-0 w-full h-full object-cover bg-cover bg-center bg-no-repeat"
-              style={{
-                backgroundImage: "url('/assets/85c96744-8427-4010-8fce-abfab61dcde3.png')"
-              }}
-              aria-hidden="true"
-            />
-            <div className="absolute inset-0 bg-black/35"></div>
-            
-            <div className="relative z-10">
-              <h1 className="text-5xl font-bold text-white">AgriSight</h1>
-              <p className="mt-4 text-lg text-white/90">Smart Agriculture for Modern Farmers</p>
-              <div className="mt-6 flex gap-4 justify-center">
-                <button id="heroCtaBtn" className="btn-primary">Get Started</button>
-                <button className="btn-outline">Learn More</button>
-              </div>
-            </div>
-          </div>
 
           {/* Header */}
           <div className="mb-8">
@@ -153,162 +99,72 @@ export default function DashboardPage(): ReactElement {
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {/* Yield Prediction Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.1,
-                ease: [0.2, 0, 0, 1],
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              whileHover={{ 
-                scale: 1.02,
-                y: -4,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ 
-                scale: 0.98,
-                transition: { duration: 0.1 }
-              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              whileHover={{ y: -2 }}
               data-feature="yield-prediction"
-              className="md-elevation-2 hover:md-elevation-3 transition-all duration-300"
+              className="md-elevation-2 hover:md-elevation-3 transition-all duration-200"
             >
               <YieldPredictionCard />
             </motion.div>
 
             {/* Pest & Disease Detection Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.2,
-                ease: [0.2, 0, 0, 1],
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              whileHover={{ 
-                scale: 1.02,
-                y: -4,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ 
-                scale: 0.98,
-                transition: { duration: 0.1 }
-              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.15 }}
+              whileHover={{ y: -2 }}
               data-feature="pest-detection"
-              className="md-elevation-2 hover:md-elevation-3 transition-all duration-300"
+              className="md-elevation-2 hover:md-elevation-3 transition-all duration-200"
             >
               <PestDiseaseCard />
             </motion.div>
 
             {/* Weather Alerts Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.3,
-                ease: [0.2, 0, 0, 1],
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              whileHover={{ 
-                scale: 1.02,
-                y: -4,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ 
-                scale: 0.98,
-                transition: { duration: 0.1 }
-              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              whileHover={{ y: -2 }}
               data-feature="weather-alerts"
-              className="md-elevation-2 hover:md-elevation-3 transition-all duration-300"
+              className="md-elevation-2 hover:md-elevation-3 transition-all duration-200"
             >
               <WeatherAlertsCard />
             </motion.div>
 
             {/* Crop Suggestions Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.4,
-                ease: [0.2, 0, 0, 1],
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              whileHover={{ 
-                scale: 1.02,
-                y: -4,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ 
-                scale: 0.98,
-                transition: { duration: 0.1 }
-              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.25 }}
+              whileHover={{ y: -2 }}
               data-feature="crop-suggestions"
-              className="md-elevation-2 hover:md-elevation-3 transition-all duration-300"
+              className="md-elevation-2 hover:md-elevation-3 transition-all duration-200"
             >
               <CropSuggestionsCard />
             </motion.div>
 
             {/* Fertilizer Recommendations Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.5,
-                ease: [0.2, 0, 0, 1],
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              whileHover={{ 
-                scale: 1.02,
-                y: -4,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ 
-                scale: 0.98,
-                transition: { duration: 0.1 }
-              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+              whileHover={{ y: -2 }}
               data-feature="fertilizer-recommendations"
-              className="md-elevation-2 hover:md-elevation-3 transition-all duration-300"
+              className="md-elevation-2 hover:md-elevation-3 transition-all duration-200"
             >
               <FertilizerRecommendationsCard onOpenModal={openModal} />
             </motion.div>
 
             {/* Market Prices Card */}
             <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: 0.6,
-                ease: [0.2, 0, 0, 1],
-                type: "spring",
-                stiffness: 100,
-                damping: 15
-              }}
-              whileHover={{ 
-                scale: 1.02,
-                y: -4,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ 
-                scale: 0.98,
-                transition: { duration: 0.1 }
-              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.35 }}
+              whileHover={{ y: -2 }}
               data-feature="market-prices"
-              className="md-elevation-2 hover:md-elevation-3 transition-all duration-300"
+              className="md-elevation-2 hover:md-elevation-3 transition-all duration-200"
             >
               <MarketPricesCard />
             </motion.div>

@@ -29,8 +29,73 @@ export default function MarketPricesCard() {
   const [selectedCrop, setSelectedCrop] = useState<string>('')
 
   useEffect(() => {
+    // Use fallback data immediately for faster loading
+    const fallbackData = [
+      {
+        id: '1',
+        crop: 'Tomato',
+        currentPrice: 45,
+        previousPrice: 42,
+        change: 3,
+        changePercent: 7.14,
+        unit: 'kg',
+        market: 'Mumbai APMC',
+        lastUpdated: '2 hours ago',
+        trend: [
+          { date: 'Jan', price: 38 },
+          { date: 'Feb', price: 42 },
+          { date: 'Mar', price: 40 },
+          { date: 'Apr', price: 45 },
+          { date: 'May', price: 48 },
+          { date: 'Jun', price: 45 }
+        ]
+      },
+      {
+        id: '2',
+        crop: 'Onion',
+        currentPrice: 28,
+        previousPrice: 32,
+        change: -4,
+        changePercent: -12.5,
+        unit: 'kg',
+        market: 'Delhi APMC',
+        lastUpdated: '1 hour ago',
+        trend: [
+          { date: 'Jan', price: 35 },
+          { date: 'Feb', price: 38 },
+          { date: 'Mar', price: 32 },
+          { date: 'Apr', price: 30 },
+          { date: 'May', price: 28 },
+          { date: 'Jun', price: 28 }
+        ]
+      },
+      {
+        id: '3',
+        crop: 'Potato',
+        currentPrice: 22,
+        previousPrice: 20,
+        change: 2,
+        changePercent: 10,
+        unit: 'kg',
+        market: 'Kolkata APMC',
+        lastUpdated: '3 hours ago',
+        trend: [
+          { date: 'Jan', price: 18 },
+          { date: 'Feb', price: 20 },
+          { date: 'Mar', price: 22 },
+          { date: 'Apr', price: 25 },
+          { date: 'May', price: 23 },
+          { date: 'Jun', price: 22 }
+        ]
+      }
+    ]
+    
+    setPrices(fallbackData)
+    setSelectedCrop('1')
+    setIsLoading(false)
+    
+    // Optional: Fetch real data in background
     const fetchMarketPrices = async () => {
-      setIsLoading(true)
       try {
         const response = await fetch('/api/mock/market-prices')
         const data = await response.json()
@@ -40,74 +105,12 @@ export default function MarketPricesCard() {
         }
       } catch (error) {
         console.error('Error fetching market prices:', error)
-        // Mock data for demo
-        const mockPrices = [
-          {
-            id: '1',
-            crop: 'Tomato',
-            currentPrice: 45,
-            previousPrice: 42,
-            change: 3,
-            changePercent: 7.14,
-            unit: 'kg',
-            market: 'Mumbai APMC',
-            lastUpdated: '2 hours ago',
-            trend: [
-              { date: 'Jan', price: 38 },
-              { date: 'Feb', price: 42 },
-              { date: 'Mar', price: 40 },
-              { date: 'Apr', price: 45 },
-              { date: 'May', price: 48 },
-              { date: 'Jun', price: 45 }
-            ]
-          },
-          {
-            id: '2',
-            crop: 'Onion',
-            currentPrice: 28,
-            previousPrice: 32,
-            change: -4,
-            changePercent: -12.5,
-            unit: 'kg',
-            market: 'Delhi APMC',
-            lastUpdated: '1 hour ago',
-            trend: [
-              { date: 'Jan', price: 35 },
-              { date: 'Feb', price: 38 },
-              { date: 'Mar', price: 32 },
-              { date: 'Apr', price: 30 },
-              { date: 'May', price: 28 },
-              { date: 'Jun', price: 28 }
-            ]
-          },
-          {
-            id: '3',
-            crop: 'Potato',
-            currentPrice: 22,
-            previousPrice: 20,
-            change: 2,
-            changePercent: 10,
-            unit: 'kg',
-            market: 'Kolkata APMC',
-            lastUpdated: '3 hours ago',
-            trend: [
-              { date: 'Jan', price: 18 },
-              { date: 'Feb', price: 20 },
-              { date: 'Mar', price: 22 },
-              { date: 'Apr', price: 25 },
-              { date: 'May', price: 23 },
-              { date: 'Jun', price: 22 }
-            ]
-          }
-        ]
-        setPrices(mockPrices)
-        setSelectedCrop('1')
-      } finally {
-        setIsLoading(false)
+        // Keep fallback data
       }
     }
 
-    fetchMarketPrices()
+    // Fetch real data after component is rendered
+    setTimeout(fetchMarketPrices, 100)
   }, [])
 
   const selectedPriceData = prices.find(p => p.id === selectedCrop)

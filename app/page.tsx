@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import Link from 'next/link'
 import Navigation from '../components/Navigation'
-import LottieAnimation from '../components/LottieAnimation'
 
 export default function HomePage(): ReactElement {
   const { t } = useTranslation()
@@ -36,8 +35,8 @@ export default function HomePage(): ReactElement {
       
       <main className="relative">
         {/* Hero Section */}
-        <section className="relative overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <section className="relative py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Content */}
               <motion.div
@@ -136,16 +135,6 @@ export default function HomePage(): ReactElement {
                     </Link>
                   </motion.div>
                 </motion.div>
-              </motion.div>
-              
-              {/* Animation */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="flex justify-center lg:justify-end"
-              >
-                <LottieAnimation />
               </motion.div>
             </div>
           </div>

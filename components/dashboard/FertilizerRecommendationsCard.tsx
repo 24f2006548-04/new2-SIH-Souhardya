@@ -28,59 +28,63 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Use fallback data immediately for faster loading
+    const fallbackData = [
+      {
+        id: '1',
+        name: 'NPK 19:19:19',
+        type: 'inorganic',
+        applicationTime: 'Before planting & during growth',
+        quantity: '50-75 kg/acre',
+        frequency: 'Every 3-4 weeks',
+        benefits: ['Balanced nutrition', 'Quick absorption', 'High yield'],
+        price: 25,
+        availability: 'high',
+        soilCompatibility: ['Alluvial', 'Black Soil', 'Red Soil']
+      },
+      {
+        id: '2',
+        name: 'Vermicompost',
+        type: 'organic',
+        applicationTime: 'During soil preparation',
+        quantity: '2-3 tons/acre',
+        frequency: 'Once per season',
+        benefits: ['Improves soil structure', 'Long-term fertility', 'Eco-friendly'],
+        price: 8,
+        availability: 'high',
+        soilCompatibility: ['All soil types']
+      },
+      {
+        id: '3',
+        name: 'Azospirillum Biofertilizer',
+        type: 'bio',
+        applicationTime: 'Seed treatment & soil application',
+        quantity: '1-2 kg/acre',
+        frequency: 'Every 2-3 months',
+        benefits: ['Nitrogen fixation', 'Root development', 'Cost effective'],
+        price: 120,
+        availability: 'medium',
+        soilCompatibility: ['Alluvial', 'Black Soil']
+      }
+    ]
+    
+    setRecommendations(fallbackData)
+    setIsLoading(false)
+    
+    // Optional: Fetch real data in background
     const fetchFertilizerRecommendations = async () => {
-      setIsLoading(true)
       try {
         const response = await fetch('/api/mock/fertilizer-recommendations')
         const data = await response.json()
         setRecommendations(data.recommendations)
       } catch (error) {
         console.error('Error fetching fertilizer recommendations:', error)
-        // Mock data for demo
-        setRecommendations([
-          {
-            id: '1',
-            name: 'NPK 19:19:19',
-            type: 'inorganic',
-            applicationTime: 'Before planting & during growth',
-            quantity: '50-75 kg/acre',
-            frequency: 'Every 3-4 weeks',
-            benefits: ['Balanced nutrition', 'Quick absorption', 'High yield'],
-            price: 25,
-            availability: 'high',
-            soilCompatibility: ['Alluvial', 'Black Soil', 'Red Soil']
-          },
-          {
-            id: '2',
-            name: 'Vermicompost',
-            type: 'organic',
-            applicationTime: 'During soil preparation',
-            quantity: '2-3 tons/acre',
-            frequency: 'Once per season',
-            benefits: ['Improves soil structure', 'Long-term fertility', 'Eco-friendly'],
-            price: 8,
-            availability: 'high',
-            soilCompatibility: ['All soil types']
-          },
-          {
-            id: '3',
-            name: 'Azospirillum Biofertilizer',
-            type: 'bio',
-            applicationTime: 'Seed treatment & soil application',
-            quantity: '1-2 kg/acre',
-            frequency: 'Every 2-3 months',
-            benefits: ['Nitrogen fixation', 'Root development', 'Cost effective'],
-            price: 120,
-            availability: 'medium',
-            soilCompatibility: ['Alluvial', 'Black Soil']
-          }
-        ])
-      } finally {
-        setIsLoading(false)
+        // Keep fallback data
       }
     }
 
-    fetchFertilizerRecommendations()
+    // Fetch real data after component is rendered
+    setTimeout(fetchFertilizerRecommendations, 100)
   }, [])
 
   const getTypeColor = (type: string) => {

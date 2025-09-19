@@ -18,30 +18,33 @@ export default function YieldPredictionCard() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Simulate API call
+    // Use fallback data immediately for faster loading
+    const fallbackData = [
+      { month: 'Jan', predicted: 120, actual: 115 },
+      { month: 'Feb', predicted: 135, actual: 130 },
+      { month: 'Mar', predicted: 150, actual: 145 },
+      { month: 'Apr', predicted: 165, actual: 160 },
+      { month: 'May', predicted: 180, actual: 175 },
+      { month: 'Jun', predicted: 195, actual: 190 }
+    ]
+    
+    setYieldData(fallbackData)
+    setIsLoading(false)
+    
+    // Optional: Fetch real data in background
     const fetchYieldData = async () => {
-      setIsLoading(true)
       try {
         const response = await fetch('/api/mock/yield-prediction')
         const data = await response.json()
         setYieldData(data.predictions)
       } catch (error) {
         console.error('Error fetching yield data:', error)
-        // Fallback data
-        setYieldData([
-          { month: 'Jan', predicted: 120, actual: 115 },
-          { month: 'Feb', predicted: 135, actual: 130 },
-          { month: 'Mar', predicted: 150, actual: 145 },
-          { month: 'Apr', predicted: 165, actual: 160 },
-          { month: 'May', predicted: 180, actual: 175 },
-          { month: 'Jun', predicted: 195, actual: 190 }
-        ])
-      } finally {
-        setIsLoading(false)
+        // Keep fallback data
       }
     }
 
-    fetchYieldData()
+    // Fetch real data after component is rendered
+    setTimeout(fetchYieldData, 100)
   }, [])
 
   const currentYield = yieldData[yieldData.length - 1]?.predicted || 0

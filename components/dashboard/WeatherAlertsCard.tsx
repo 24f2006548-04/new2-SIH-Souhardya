@@ -35,53 +35,57 @@ export default function WeatherAlertsCard() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    // Use fallback data immediately for faster loading
+    const fallbackData = {
+      current: {
+        temperature: 28,
+        humidity: 65,
+        windSpeed: 12,
+        condition: 'Partly Cloudy',
+        icon: 'cloud'
+      },
+      alerts: [
+        {
+          id: '1',
+          type: 'warning',
+          title: 'Heavy Rain Expected',
+          description: 'Heavy rainfall expected in the next 24 hours. Consider delaying irrigation.',
+          time: '2 hours ago'
+        },
+        {
+          id: '2',
+          type: 'info',
+          title: 'Temperature Drop',
+          description: 'Temperature will drop to 15°C tonight. Protect sensitive crops.',
+          time: '4 hours ago'
+        }
+      ],
+      forecast: [
+        { day: 'Today', high: 32, low: 18, condition: 'Sunny', precipitation: 0 },
+        { day: 'Tomorrow', high: 28, low: 16, condition: 'Rainy', precipitation: 80 },
+        { day: 'Wed', high: 26, low: 14, condition: 'Cloudy', precipitation: 20 },
+        { day: 'Thu', high: 30, low: 17, condition: 'Sunny', precipitation: 0 },
+        { day: 'Fri', high: 33, low: 19, condition: 'Partly Cloudy', precipitation: 10 }
+      ]
+    }
+    
+    setWeatherData(fallbackData)
+    setIsLoading(false)
+    
+    // Optional: Fetch real data in background
     const fetchWeatherData = async () => {
-      setIsLoading(true)
       try {
         const response = await fetch('/api/mock/weather')
         const data = await response.json()
         setWeatherData(data)
       } catch (error) {
         console.error('Error fetching weather data:', error)
-        // Mock data for demo
-        setWeatherData({
-          current: {
-            temperature: 28,
-            humidity: 65,
-            windSpeed: 12,
-            condition: 'Partly Cloudy',
-            icon: 'cloud'
-          },
-          alerts: [
-            {
-              id: '1',
-              type: 'warning',
-              title: 'Heavy Rain Expected',
-              description: 'Heavy rainfall expected in the next 24 hours. Consider delaying irrigation.',
-              time: '2 hours ago'
-            },
-            {
-              id: '2',
-              type: 'info',
-              title: 'Temperature Drop',
-              description: 'Temperature will drop to 15°C tonight. Protect sensitive crops.',
-              time: '4 hours ago'
-            }
-          ],
-          forecast: [
-            { day: 'Today', high: 32, low: 18, condition: 'Sunny', precipitation: 0 },
-            { day: 'Tomorrow', high: 28, low: 16, condition: 'Rainy', precipitation: 80 },
-            { day: 'Wed', high: 26, low: 14, condition: 'Cloudy', precipitation: 20 },
-            { day: 'Thu', high: 30, low: 17, condition: 'Sunny', precipitation: 0 },
-            { day: 'Fri', high: 33, low: 19, condition: 'Partly Cloudy', precipitation: 10 }
-          ]
-        })
-      } finally {
-        setIsLoading(false)
+        // Keep fallback data
       }
     }
 
-    fetchWeatherData()
+    // Fetch real data after component is rendered
+    setTimeout(fetchWeatherData, 100)
   }, [])
 
   const getWeatherIcon = (condition: string) => {
