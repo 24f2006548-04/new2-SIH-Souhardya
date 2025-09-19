@@ -39,8 +39,8 @@ export default function MarketPricesCard() {
         change: 3,
         changePercent: 7.14,
         unit: 'kg',
-        market: 'Mumbai APMC',
-        lastUpdated: '2 hours ago',
+        market: t('dashboard.mumbaiApmc'),
+        lastUpdated: t('dashboard.2HoursAgo'),
         trend: [
           { date: 'Jan', price: 38 },
           { date: 'Feb', price: 42 },
@@ -58,8 +58,8 @@ export default function MarketPricesCard() {
         change: -4,
         changePercent: -12.5,
         unit: 'kg',
-        market: 'Delhi APMC',
-        lastUpdated: '1 hour ago',
+        market: t('dashboard.delhiApmc'),
+        lastUpdated: t('dashboard.1HourAgo'),
         trend: [
           { date: 'Jan', price: 35 },
           { date: 'Feb', price: 38 },
@@ -77,8 +77,8 @@ export default function MarketPricesCard() {
         change: 2,
         changePercent: 10,
         unit: 'kg',
-        market: 'Kolkata APMC',
-        lastUpdated: '3 hours ago',
+        market: t('dashboard.kolkataApmc'),
+        lastUpdated: t('dashboard.3HoursAgo'),
         trend: [
           { date: 'Jan', price: 18 },
           { date: 'Feb', price: 20 },
@@ -132,7 +132,7 @@ export default function MarketPricesCard() {
           <DollarSign className="h-6 w-6 text-green-600" />
         </div>
         <h3 className="text-lg font-semibold text-gray-900 ml-3">
-          {t('dashboard.marketPrices')}
+          {t('features.marketPrices.title')}
         </h3>
       </div>
 
@@ -180,7 +180,7 @@ export default function MarketPricesCard() {
                 ₹{selectedPriceData.currentPrice}
               </span>
               <span className="text-sm text-gray-500 ml-2">
-                per {selectedPriceData.unit}
+                {t('dashboard.perKg')}
               </span>
             </div>
             
@@ -198,7 +198,7 @@ export default function MarketPricesCard() {
 
           {/* Price Trend Chart */}
           <div>
-            <h5 className="font-medium text-gray-900 mb-3">Price Trend (6 months)</h5>
+            <h5 className="font-medium text-gray-900 mb-3">{t('dashboard.priceTrend')}</h5>
             <div className="h-48">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={selectedPriceData.trend}>
@@ -220,7 +220,7 @@ export default function MarketPricesCard() {
                       borderRadius: '8px',
                       boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
                     }}
-                    formatter={(value: number) => [`₹${value}`, 'Price']}
+                    formatter={(value: number) => [`₹${value}`, t('dashboard.price')]}
                   />
                   <Line 
                     type="monotone" 
@@ -255,10 +255,10 @@ export default function MarketPricesCard() {
           {/* Quick Actions */}
           <div className="flex space-x-2">
             <button className="flex-1 btn-primary text-sm">
-              Set Price Alert
+              {t('dashboard.setPriceAlert')}
             </button>
             <button className="flex-1 btn-secondary text-sm">
-              View All Markets
+              {t('dashboard.viewAllMarkets')}
             </button>
           </div>
         </div>

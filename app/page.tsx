@@ -9,18 +9,18 @@ import Navigation from '../components/Navigation'
 export default function HomePage(): ReactElement {
   const { t } = useTranslation()
 
-  const handleFeatureClick = (featureTitle: string) => {
+  const handleFeatureClick = (featureKey: string) => {
     // Navigate to dashboard and scroll to specific feature
     const featureMap: Record<string, string> = {
-      'Yield Prediction': 'yield-prediction',
-      'Pest Detection': 'pest-detection', 
-      'Weather Alerts': 'weather-alerts',
-      'Crop Suggestions': 'crop-suggestions',
-      'Fertilizer Guide': 'fertilizer-recommendations',
-      'Market Prices': 'market-prices'
+      'yieldPrediction': 'yield-prediction',
+      'pestDetection': 'pest-detection', 
+      'weatherAlerts': 'weather-alerts',
+      'cropSuggestions': 'crop-suggestions',
+      'fertilizerGuide': 'fertilizer-recommendations',
+      'marketPrices': 'market-prices'
     }
     
-    const featureId = featureMap[featureTitle]
+    const featureId = featureMap[featureKey]
     if (featureId) {
       // Store the target feature in sessionStorage for dashboard to use
       sessionStorage.setItem('scrollToFeature', featureId)
@@ -89,21 +89,14 @@ export default function HomePage(): ReactElement {
                       transition: { duration: 0.1 }
                     }}
                   >
-                    <Link href="/profile" className="btn-primary text-lg px-8 py-3 relative overflow-hidden">
+                    <Link href="/profile" className="btn-primary text-lg px-8 py-3">
                       <motion.span
-                        className="relative z-10"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1 }}
                       >
                         {t('landing.getStarted')}
                       </motion.span>
-                      <motion.div
-                        className="absolute inset-0 bg-white/20"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: "100%" }}
-                        transition={{ duration: 0.6 }}
-                      />
                     </Link>
                   </motion.div>
                   <motion.div
@@ -117,21 +110,14 @@ export default function HomePage(): ReactElement {
                       transition: { duration: 0.1 }
                     }}
                   >
-                    <Link href="/dashboard" className="btn-secondary text-lg px-8 py-3 relative overflow-hidden">
+                    <Link href="/dashboard" className="btn-secondary text-lg px-8 py-3">
                       <motion.span
-                        className="relative z-10"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.1 }}
                       >
                         {t('landing.learnMore')}
                       </motion.span>
-                      <motion.div
-                        className="absolute inset-0 bg-primary-600/10"
-                        initial={{ x: "-100%" }}
-                        whileHover={{ x: "100%" }}
-                        transition={{ duration: 0.6 }}
-                      />
                     </Link>
                   </motion.div>
                 </motion.div>
@@ -151,43 +137,37 @@ export default function HomePage(): ReactElement {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Smart Agriculture Features
+                {t('features.title')}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Harness the power of AI and data analytics to optimize your farming operations
+                {t('features.subtitle')}
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 {
-                  title: 'Yield Prediction',
-                  description: 'AI-powered crop yield forecasting based on weather, soil, and historical data',
+                  key: 'yieldPrediction',
                   icon: '🌾'
                 },
                 {
-                  title: 'Pest Detection',
-                  description: 'Upload photos to identify pests and diseases with instant recommendations',
+                  key: 'pestDetection',
                   icon: '🔍'
                 },
                 {
-                  title: 'Weather Alerts',
-                  description: 'Real-time weather monitoring and alerts for optimal farming decisions',
+                  key: 'weatherAlerts',
                   icon: '🌤️'
                 },
                 {
-                  title: 'Crop Suggestions',
-                  description: 'Personalized crop recommendations based on your farm conditions',
+                  key: 'cropSuggestions',
                   icon: '🌱'
                 },
                 {
-                  title: 'Fertilizer Guide',
-                  description: 'Smart fertilizer recommendations for maximum crop health and yield',
+                  key: 'fertilizerGuide',
                   icon: '🧪'
                 },
                 {
-                  title: 'Market Prices',
-                  description: 'Live market price tracking and selling recommendations',
+                  key: 'marketPrices',
                   icon: '📈'
                 }
               ].map((feature, index) => (
@@ -214,16 +194,16 @@ export default function HomePage(): ReactElement {
                     transition: { duration: 0.1 }
                   }}
                   className="card hover:shadow-2xl transition-all duration-300 cursor-pointer bg-white/80 backdrop-blur-sm border border-white/20"
-                  onClick={() => handleFeatureClick(feature.title)}
+                  onClick={() => handleFeatureClick(feature.key)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault()
-                      handleFeatureClick(feature.title)
+                      handleFeatureClick(feature.key)
                     }
                   }}
-                  aria-label={`Go to ${feature.title} feature`}
+                  aria-label={`Go to ${t(`features.${feature.key}.title`)} feature`}
                 >
                   <motion.div 
                     className="text-4xl mb-4"
@@ -243,7 +223,7 @@ export default function HomePage(): ReactElement {
                       transition: { duration: 0.2 }
                     }}
                   >
-                    {feature.title}
+                    {t(`features.${feature.key}.title`)}
                   </motion.h3>
                   <motion.p 
                     className="text-gray-600 mb-4"
@@ -253,7 +233,7 @@ export default function HomePage(): ReactElement {
                       transition: { duration: 0.2 }
                     }}
                   >
-                    {feature.description}
+                    {t(`features.${feature.key}.description`)}
                   </motion.p>
                   <motion.div 
                     className="mt-4 text-primary-600 font-medium text-sm flex items-center gap-2"
@@ -265,7 +245,7 @@ export default function HomePage(): ReactElement {
                       transition: { duration: 0.2 }
                     }}
                   >
-                    <span>Click to explore</span>
+                    <span>{t('features.clickToExplore')}</span>
                     <motion.span
                       animate={{ x: [0, 5, 0] }}
                       transition={{ 
@@ -293,16 +273,16 @@ export default function HomePage(): ReactElement {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Ready to Transform Your Farming?
+                {t('cta.title')}
               </h2>
               <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-                Join thousands of farmers who are already using AgriSight to increase their yields and reduce costs.
+                {t('cta.subtitle')}
               </p>
               <Link 
                 href="/profile" 
                 className="bg-white text-primary-600 hover:bg-gray-100 font-medium py-3 px-8 rounded-lg text-lg transition-colors duration-200 inline-block"
               >
-                Get Started Today
+                {t('cta.button')}
               </Link>
             </motion.div>
           </div>

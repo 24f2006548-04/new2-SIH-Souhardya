@@ -59,12 +59,12 @@ export default function YieldPredictionCard() {
             <TrendingUp className="h-6 w-6 text-primary-600" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 ml-3">
-            {t('dashboard.yieldPrediction')}
+            {t('features.yieldPrediction.title')}
           </h3>
         </div>
         <div className="flex items-center text-sm text-gray-500">
           <Calendar className="h-4 w-4 mr-1" />
-          Next 6 months
+          {t('dashboard.next6Months')}
         </div>
       </div>
 
@@ -114,7 +114,7 @@ export default function YieldPredictionCard() {
                   stroke="#22c55e" 
                   strokeWidth={2}
                   dot={{ fill: '#22c55e', strokeWidth: 2, r: 4 }}
-                  name="Predicted"
+                  name={t('dashboard.predicted')}
                 />
                 <Line 
                   type="monotone" 
@@ -122,7 +122,7 @@ export default function YieldPredictionCard() {
                   stroke="#3b82f6" 
                   strokeWidth={2}
                   dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
-                  name="Actual"
+                  name={t('dashboard.actual')}
                 />
               </LineChart>
             </ResponsiveContainer>

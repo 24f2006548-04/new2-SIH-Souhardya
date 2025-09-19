@@ -14,14 +14,29 @@
   "profile": {
     "title": "किसान प्रोफ़ाइल",
     "subtitle": "व्यक्तिगत सिफारिशें प्राप्त करने के लिए अपने खेत के बारे में बताएं",
+    "name": "नाम",
+    "enterName": "अपना नाम दर्ज करें",
+    "personalInfo": "व्यक्तिगत जानकारी",
+    "locationInfo": "स्थान की जानकारी",
+    "cropsYouGrow": "आपकी फसलें",
     "state": "राज्य",
+    "selectState": "राज्य चुनें",
+    "selectStateHelp": "स्थानीय सिफारिशों के लिए अपना राज्य चुनें",
     "district": "जिला",
+    "enterDistrict": "अपना जिला दर्ज करें",
     "farmSize": "खेत का आकार (एकड़)",
+    "enterFarmSize": "एकड़ में खेत का आकार दर्ज करें",
     "soilType": "मिट्टी का प्रकार",
+    "selectSoilType": "मिट्टी का प्रकार चुनें",
     "irrigation": "सिंचाई का प्रकार",
+    "selectIrrigationType": "सिंचाई का प्रकार चुनें",
+    "cropSelection": "फसल चयन",
+    "selectCropsHelp": "सभी फसलें चुनें जो आप वर्तमान में उगाते हैं या उगाने की योजना बना रहे हैं",
     "languages": "बोली जाने वाली भाषाएं",
+    "selectLanguagesHelp": "बेहतर सिफारिशों के लिए सभी भाषाएं चुनें जिनमें आप सहज हैं",
     "save": "प्रोफ़ाइल सहेजें",
-    "update": "प्रोफ़ाइल अपडेट करें"
+    "update": "प्रोफ़ाइल अपडेट करें",
+    "errorSaving": "प्रोफ़ाइल सहेजने में त्रुटि। कृपया पुनः प्रयास करें।"
   },
   "dashboard": {
     "title": "डैशबोर्ड",
@@ -33,12 +48,107 @@
     "fertilizerRecommendations": "उर्वरक सिफारिशें",
     "marketPrices": "बाजार मूल्य"
   },
+  "features": {
+    "title": "स्मार्ट कृषि सुविधाएं",
+    "subtitle": "अपने कृषि संचालन को अनुकूलित करने के लिए AI और डेटा एनालिटिक्स की शक्ति का उपयोग करें",
+    "yieldPrediction": {
+      "title": "उत्पादन भविष्यवाणी",
+      "description": "मौसम, मिट्टी और ऐतिहासिक डेटा के आधार पर AI-संचालित फसल उत्पादन पूर्वानुमान"
+    },
+    "pestDetection": {
+      "title": "कीट पहचान",
+      "description": "तत्काल सिफारिशों के साथ कीटों और रोगों की पहचान के लिए फोटो अपलोड करें"
+    },
+    "weatherAlerts": {
+      "title": "मौसम चेतावनियां",
+      "description": "इष्टतम कृषि निर्णयों के लिए वास्तविक समय मौसम निगरानी और चेतावनियां"
+    },
+    "cropSuggestions": {
+      "title": "फसल सुझाव",
+      "description": "आपकी खेत की स्थितियों के आधार पर व्यक्तिगत फसल सिफारिशें"
+    },
+    "fertilizerGuide": {
+      "title": "उर्वरक गाइड",
+      "description": "अधिकतम फसल स्वास्थ्य और उत्पादन के लिए स्मार्ट उर्वरक सिफारिशें"
+    },
+    "marketPrices": {
+      "title": "बाजार मूल्य",
+      "description": "लाइव बाजार मूल्य ट्रैकिंग और बिक्री सिफारिशें"
+    },
+    "clickToExplore": "अन्वेषण करने के लिए क्लिक करें"
+  },
+  "cta": {
+    "title": "अपनी कृषि को बदलने के लिए तैयार हैं?",
+    "subtitle": "हजारों किसानों में शामिल हों जो पहले से ही AgriSight का उपयोग करके अपने उत्पादन बढ़ा रहे हैं और लागत कम कर रहे हैं।",
+    "button": "आज ही शुरू करें"
+  },
+  "dashboard": {
+    "title": "डैशबोर्ड",
+    "welcome": "वापस स्वागत है",
+    "viewAll": "सभी देखें",
+    "viewAllSuggestions": "सभी सुझाव देखें",
+    "viewAllMarkets": "सभी बाजार देखें",
+    "viewAllFertilizers": "सभी उर्वरक देखें",
+    "fertilizerDetails": "उर्वरक विवरण:",
+    "uploadPlantPhoto": "पौधे की फोटो अपलोड करें",
+    "dropImageHere": "यहां छवि छोड़ें",
+    "uploadedPlant": "अपलोड किया गया पौधा",
+    "predicted": "भविष्यवाणी",
+    "actual": "वास्तविक",
+    "setPriceAlert": "मूल्य अलर्ट सेट करें",
+    "dragDropSelect": "खींचें और छोड़ें या चुनने के लिए क्लिक करें (JPG, PNG, WebP)",
+    "maxFileSize": "अधिकतम फ़ाइल आकार: 5MB",
+    "plantingPeriod": "बुवाई अवधि",
+    "expectedPrice": "अपेक्षित मूल्य",
+    "expectedYield": "अपेक्षित उपज",
+    "growthPeriod": "विकास अवधि",
+    "waterRequirement": "पानी की आवश्यकता",
+    "soilCompatibility": "मिट्टी अनुकूलता",
+    "keyBenefits": "मुख्य लाभ",
+    "type": "प्रकार",
+    "availability": "उपलब्धता",
+    "price": "मूल्य",
+    "applicationPeriod": "आवेदन अवधि",
+    "dosage": "खुराक",
+    "frequency": "आवृत्ति",
+    "currentPrice": "वर्तमान मूल्य",
+    "priceChange": "मूल्य परिवर्तन",
+    "location": "स्थान",
+    "lastUpdated": "अंतिम अपडेट",
+    "priceTrend": "मूल्य रुझान (6 महीने)",
+    "perKg": "प्रति किलो",
+    "perAcre": "प्रति एकड़",
+    "tonsPerAcre": "टन/एकड़",
+    "days": "दिन",
+    "weeks": "सप्ताह",
+    "hoursAgo": "घंटे पहले",
+    "highAvailability": "उच्च उपलब्धता",
+    "mediumAvailability": "मध्यम उपलब्धता",
+    "lowAvailability": "कम उपलब्धता",
+    "organic": "जैविक",
+    "inorganic": "अजैविक",
+    "low": "कम",
+    "medium": "मध्यम",
+    "high": "उच्च",
+    "next6Months": "अगले 6 महीने",
+    "beforePlantingDuringGrowth": "बुवाई से पहले और विकास के दौरान",
+    "every3to4Weeks": "हर 3-4 सप्ताह",
+    "mumbaiApmc": "मुंबई APMC",
+    "delhiApmc": "दिल्ली APMC",
+    "kolkataApmc": "कोलकाता APMC",
+    "2HoursAgo": "2 घंटे पहले",
+    "1HourAgo": "1 घंटा पहले",
+    "3HoursAgo": "3 घंटे पहले",
+    "4HoursAgo": "4 घंटे पहले",
+    "personalizedInsights": "यहां आपके व्यक्तिगत कृषि अंतर्दृष्टि हैं"
+  },
   "common": {
     "loading": "लोड हो रहा है...",
     "error": "त्रुटि",
     "success": "सफलता",
     "upload": "अपलोड करें",
     "select": "चुनें",
-    "viewDetails": "विवरण देखें"
+    "viewDetails": "विवरण देखें",
+    "farmer": "किसान"
   }
 }

@@ -14,14 +14,29 @@
   "profile": {
     "title": "କୃଷକ ପ୍ରୋଫାଇଲ୍",
     "subtitle": "ବ୍ୟକ୍ତିଗତ ସୁପାରିଶ ପାଇଁ ଆପଣଙ୍କ କ୍ଷେତ ବିଷୟରେ ଆମକୁ କୁହନ୍ତୁ",
+    "name": "ନାମ",
+    "enterName": "ଆପଣଙ୍କର ନାମ ଦର୍ଜ କରନ୍ତୁ",
+    "personalInfo": "ବ୍ୟକ୍ତିଗତ ସୂଚନା",
+    "locationInfo": "ଅବସ୍ଥାନ ସୂଚନା",
+    "cropsYouGrow": "ଆପଣଙ୍କର ଫସଲ",
     "state": "ରାଜ୍ୟ",
+    "selectState": "ରାଜ୍ୟ ବାଛନ୍ତୁ",
+    "selectStateHelp": "ସ୍ଥାନୀୟ ସୁପାରିଶ ପାଇଁ ଆପଣଙ୍କର ରାଜ୍ୟ ବାଛନ୍ତୁ",
     "district": "ଜିଲ୍ଲା",
+    "enterDistrict": "ଆପଣଙ୍କର ଜିଲ୍ଲା ଦର୍ଜ କରନ୍ତୁ",
     "farmSize": "କ୍ଷେତର ଆକାର (ଏକର)",
+    "enterFarmSize": "ଏକରରେ କ୍ଷେତର ଆକାର ଦର୍ଜ କରନ୍ତୁ",
     "soilType": "ମାଟିର ପ୍ରକାର",
+    "selectSoilType": "ମାଟିର ପ୍ରକାର ବାଛନ୍ତୁ",
     "irrigation": "ସିଞ୍ଚାଇର ପ୍ରକାର",
+    "selectIrrigationType": "ସିଞ୍ଚାଇର ପ୍ରକାର ବାଛନ୍ତୁ",
+    "cropSelection": "ଫସଲ ଚୟନ",
+    "selectCropsHelp": "ସମସ୍ତ ଫସଲ ବାଛନ୍ତୁ ଯାହା ଆପଣ ବର୍ତ୍ତମାନ ଉତ୍ପାଦନ କରୁଛନ୍ତି କିମ୍ବା ଉତ୍ପାଦନ କରିବାର ଯୋଜନା କରୁଛନ୍ତି",
     "languages": "କହିବା ଭାଷା",
+    "selectLanguagesHelp": "ଉନ୍ନତ ସୁପାରିଶ ପାଇଁ ସମସ୍ତ ଭାଷା ବାଛନ୍ତୁ ଯେଉଁଥିରେ ଆପଣ ସୁବିଧାଜନକ ଅଛନ୍ତି",
     "save": "ପ୍ରୋଫାଇଲ୍ ସେଭ୍ କରନ୍ତୁ",
-    "update": "ପ୍ରୋଫାଇଲ୍ ଅପଡେଟ୍ କରନ୍ତୁ"
+    "update": "ପ୍ରୋଫାଇଲ୍ ଅପଡେଟ୍ କରନ୍ତୁ",
+    "errorSaving": "ପ୍ରୋଫାଇଲ୍ ସେଭ୍ କରିବାରେ ତ୍ରୁଟି। ଦୟାକରି ପୁନର୍ବାର ଚେଷ୍ଟା କରନ୍ତୁ।"
   },
   "dashboard": {
     "title": "ଡ୍ୟାସବୋର୍ଡ",
@@ -33,12 +48,107 @@
     "fertilizerRecommendations": "ସାର ସୁପାରିଶ",
     "marketPrices": "ବଜାର ମୂଲ୍ୟ"
   },
+  "features": {
+    "title": "ସ୍ମାର୍ଟ କୃଷି ସୁବିଧା",
+    "subtitle": "ଆପଣଙ୍କ କୃଷି କାର୍ଯ୍ୟକଳାପକୁ ଅନୁକୂଳିତ କରିବା ପାଇଁ AI ଏବଂ ଡାଟା ବିଶ୍ଳେଷଣର ଶକ୍ତି ବ୍ୟବହାର କରନ୍ତୁ",
+    "yieldPrediction": {
+      "title": "ଉତ୍ପାଦନ ଭବିଷ୍ୟତବାଣୀ",
+      "description": "ମୌସୁମୀ, ମାଟି ଏବଂ historical ଡାଟା ଉପରେ ଆଧାରିତ AI-ଚାଳିତ ଫସଲ ଉତ୍ପାଦନ ପୂର୍ବାନୁମାନ"
+    },
+    "pestDetection": {
+      "title": "କୀଟ ଚିହ୍ନଟ",
+      "description": "ତତ୍କ୍ଷଣାତ୍ ସୁପାରିଶ ସହିତ କୀଟ ଏବଂ ରୋଗ ଚିହ୍ନଟ ପାଇଁ ଫଟୋ ଅପଲୋଡ୍ କରନ୍ତୁ"
+    },
+    "weatherAlerts": {
+      "title": "ମୌସୁମୀ ଚେତାବନୀ",
+      "description": "ସର୍ବୋତ୍ତମ କୃଷି ସିଦ୍ଧାନ୍ତ ପାଇଁ ବାସ୍ତବ ସମୟ ମୌସୁମୀ ନିରୀକ୍ଷଣ ଏବଂ ଚେତାବନୀ"
+    },
+    "cropSuggestions": {
+      "title": "ଫସଲ ସୁପାରିଶ",
+      "description": "ଆପଣଙ୍କ କ୍ଷେତର ପରିସ୍ଥିତି ଉପରେ ଆଧାରିତ ବ୍ୟକ୍ତିଗତ ଫସଲ ସୁପାରିଶ"
+    },
+    "fertilizerGuide": {
+      "title": "ସାର ଗାଇଡ୍",
+      "description": "ସର୍ବାଧିକ ଫସଲ ସ୍ୱାସ୍ଥ୍ୟ ଏବଂ ଉତ୍ପାଦନ ପାଇଁ ସ୍ମାର୍ଟ ସାର ସୁପାରିଶ"
+    },
+    "marketPrices": {
+      "title": "ବଜାର ମୂଲ୍ୟ",
+      "description": "ଲାଇଭ୍ ବଜାର ମୂଲ୍ୟ ଟ୍ରାକିଂ ଏବଂ ବିକ୍ରୟ ସୁପାରିଶ"
+    },
+    "clickToExplore": "ଅନୁସନ୍ଧାନ କରିବା ପାଇଁ କ୍ଲିକ୍ କରନ୍ତୁ"
+  },
+  "cta": {
+    "title": "ଆପଣଙ୍କ କୃଷିକୁ ପରିବର୍ତ୍ତନ କରିବା ପାଇଁ ପ୍ରସ୍ତୁତ?",
+    "subtitle": "ହଜାର ହଜାର କୃଷକଙ୍କ ସହିତ ଯୋଗ ଦିଅନ୍ତୁ ଯେଉଁମାନେ ପୂର୍ବରୁ AgriSight ବ୍ୟବହାର କରି ନିଜର ଉତ୍ପାଦନ ବୃଦ୍ଧି କରୁଛନ୍ତି ଏବଂ ଖର୍ଚ୍ଚ କମାଉଛନ୍ତି।",
+    "button": "ଆଜି ଆରମ୍ଭ କରନ୍ତୁ"
+  },
+  "dashboard": {
+    "title": "ଡ୍ୟାସବୋର୍ଡ",
+    "welcome": "ପୁନର୍ବାର ସ୍ୱାଗତ",
+    "viewAll": "ସମସ୍ତ ଦେଖନ୍ତୁ",
+    "viewAllSuggestions": "ସମସ୍ତ ସୁପାରିଶ ଦେଖନ୍ତୁ",
+    "viewAllMarkets": "ସମସ୍ତ ବଜାର ଦେଖନ୍ତୁ",
+    "viewAllFertilizers": "ସମସ୍ତ ସାର ଦେଖନ୍ତୁ",
+    "fertilizerDetails": "ସାର ବିବରଣୀ:",
+    "uploadPlantPhoto": "ଉଦ୍ଭିଦ ଫଟୋ ଅପଲୋଡ୍ କରନ୍ତୁ",
+    "dropImageHere": "ଏଠାରେ ଛବି ଛାଡନ୍ତୁ",
+    "uploadedPlant": "ଅପଲୋଡ୍ ହୋଇଥିବା ଉଦ୍ଭିଦ",
+    "predicted": "ଭବିଷ୍ୟତବାଣୀ",
+    "actual": "ବାସ୍ତବ",
+    "setPriceAlert": "ମୂଲ୍ୟ ଚେତାବନୀ ସେଟ୍ କରନ୍ତୁ",
+    "dragDropSelect": "ଟାଣନ୍ତୁ ଏବଂ ଛାଡନ୍ତୁ କିମ୍ବା ବାଛିବା ପାଇଁ କ୍ଲିକ୍ କରନ୍ତୁ (JPG, PNG, WebP)",
+    "maxFileSize": "ସର୍ବାଧିକ ଫାଇଲ୍ ଆକାର: 5MB",
+    "plantingPeriod": "ବୁଆ ଅବଧି",
+    "expectedPrice": "ଆଶା କରାଯାଉଥିବା ମୂଲ୍ୟ",
+    "expectedYield": "ଆଶା କରାଯାଉଥିବା ଫସଲ",
+    "growthPeriod": "ବୃଦ୍ଧି ଅବଧି",
+    "waterRequirement": "ଜଳ ଆବଶ୍ୟକତା",
+    "soilCompatibility": "ମାଟି ସୁସଙ୍ଗତତା",
+    "keyBenefits": "ମୁଖ୍ୟ ଲାଭ",
+    "type": "ପ୍ରକାର",
+    "availability": "ଉପଲବ୍ଧତା",
+    "price": "ମୂଲ୍ୟ",
+    "applicationPeriod": "ପ୍ରୟୋଗ ଅବଧି",
+    "dosage": "ମାତ୍ରା",
+    "frequency": "ପୁନରାବୃତ୍ତି",
+    "currentPrice": "ବର୍ତ୍ତମାନ ମୂଲ୍ୟ",
+    "priceChange": "ମୂଲ୍ୟ ପରିବର୍ତ୍ତନ",
+    "location": "ଅବସ୍ଥାନ",
+    "lastUpdated": "ଶେଷ ଅପଡେଟ୍",
+    "priceTrend": "ମୂଲ୍ୟ ରୁଝାନ (6 ମାସ)",
+    "perKg": "ପ୍ରତି କିଲୋ",
+    "perAcre": "ପ୍ରତି ଏକର",
+    "tonsPerAcre": "ଟନ/ଏକର",
+    "days": "ଦିନ",
+    "weeks": "ସପ୍ତାହ",
+    "hoursAgo": "ଘଣ୍ଟା ପୂର୍ବେ",
+    "highAvailability": "ଉଚ୍ଚ ଉପଲବ୍ଧତା",
+    "mediumAvailability": "ମଧ୍ୟମ ଉପଲବ୍ଧତା",
+    "lowAvailability": "ନିମ୍ନ ଉପଲବ୍ଧତା",
+    "organic": "ଜୈବିକ",
+    "inorganic": "ଅଜୈବିକ",
+    "low": "ନିମ୍ନ",
+    "medium": "ମଧ୍ୟମ",
+    "high": "ଉଚ୍ଚ",
+    "next6Months": "ପରବର୍ତ୍ତୀ 6 ମାସ",
+    "beforePlantingDuringGrowth": "ବୁଆ ପୂର୍ବରୁ ଏବଂ ବୃଦ୍ଧି ସମୟରେ",
+    "every3to4Weeks": "ପ୍ରତି 3-4 ସପ୍ତାହ",
+    "mumbaiApmc": "ମୁମ୍ବାଇ APMC",
+    "delhiApmc": "ଦିଲ୍ଲୀ APMC",
+    "kolkataApmc": "କୋଲକାତା APMC",
+    "2HoursAgo": "2 ଘଣ୍ଟା ପୂର୍ବେ",
+    "1HourAgo": "1 ଘଣ୍ଟା ପୂର୍ବେ",
+    "3HoursAgo": "3 ଘଣ୍ଟା ପୂର୍ବେ",
+    "4HoursAgo": "4 ଘଣ୍ଟା ପୂର୍ବେ",
+    "personalizedInsights": "ଏଠାରେ ଆପଣଙ୍କର ବ୍ୟକ୍ତିଗତ କୃଷି ଅନ୍ତର୍ଦ୍ଦୃଷ୍ଟି ଅଛି"
+  },
   "common": {
     "loading": "ଲୋଡ୍ ହେଉଛି...",
     "error": "ତ୍ରୁଟି",
     "success": "ସଫଳତା",
     "upload": "ଅପଲୋଡ୍ କରନ୍ତୁ",
     "select": "ବାଛନ୍ତୁ",
-    "viewDetails": "ବିବରଣୀ ଦେଖନ୍ତୁ"
+    "viewDetails": "ବିବରଣୀ ଦେଖନ୍ତୁ",
+    "farmer": "କୃଷକ"
   }
 }

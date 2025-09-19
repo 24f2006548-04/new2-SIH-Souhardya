@@ -91,7 +91,7 @@ export default function DashboardPage(): ReactElement {
               {t('dashboard.title')}
             </h1>
             <p className="text-lg text-gray-600">
-              {t('dashboard.welcome')}, Farmer! Here's your personalized agriculture insights.
+              {t('dashboard.welcome')}, {t('common.farmer')}! {t('dashboard.personalizedInsights')}.
             </p>
           </div>
 

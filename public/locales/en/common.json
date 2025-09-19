@@ -14,24 +14,123 @@
   "profile": {
     "title": "Farmer Profile",
     "subtitle": "Tell us about your farm to get personalized recommendations",
+    "name": "Name",
+    "enterName": "Enter your name",
+    "personalInfo": "Personal Information",
+    "locationInfo": "Location Information",
+    "cropsYouGrow": "Crops You Grow",
     "state": "State",
+    "selectState": "Select State",
+    "selectStateHelp": "Select your state for localized recommendations",
     "district": "District",
+    "enterDistrict": "Enter your district",
     "farmSize": "Farm Size (acres)",
+    "enterFarmSize": "Enter farm size in acres",
     "soilType": "Soil Type",
+    "selectSoilType": "Select Soil Type",
     "irrigation": "Irrigation Type",
+    "selectIrrigationType": "Select Irrigation Type",
+    "cropSelection": "Crop Selection",
+    "selectCropsHelp": "Select all crops you currently grow or plan to grow",
     "languages": "Languages Spoken",
+    "selectLanguagesHelp": "Select all languages you're comfortable with for better recommendations",
     "save": "Save Profile",
-    "update": "Update Profile"
+    "update": "Update Profile",
+    "errorSaving": "Error saving profile. Please try again."
+  },
+  "features": {
+    "title": "Smart Agriculture Features",
+    "subtitle": "Harness the power of AI and data analytics to optimize your farming operations",
+    "yieldPrediction": {
+      "title": "Yield Prediction",
+      "description": "AI-powered crop yield forecasting based on weather, soil, and historical data"
+    },
+    "pestDetection": {
+      "title": "Pest Detection",
+      "description": "Upload photos to identify pests and diseases with instant recommendations"
+    },
+    "weatherAlerts": {
+      "title": "Weather Alerts",
+      "description": "Real-time weather monitoring and alerts for optimal farming decisions"
+    },
+    "cropSuggestions": {
+      "title": "Crop Suggestions",
+      "description": "Personalized crop recommendations based on your farm conditions"
+    },
+    "fertilizerGuide": {
+      "title": "Fertilizer Guide",
+      "description": "Smart fertilizer recommendations for maximum crop health and yield"
+    },
+    "marketPrices": {
+      "title": "Market Prices",
+      "description": "Live market price tracking and selling recommendations"
+    },
+    "clickToExplore": "Click to explore"
+  },
+  "cta": {
+    "title": "Ready to Transform Your Farming?",
+    "subtitle": "Join thousands of farmers who are already using AgriSight to increase their yields and reduce costs.",
+    "button": "Get Started Today"
   },
   "dashboard": {
     "title": "Dashboard",
     "welcome": "Welcome back",
-    "yieldPrediction": "Yield Prediction",
-    "pestDisease": "Pest & Disease Detection",
-    "weatherAlerts": "Weather Alerts",
-    "cropSuggestions": "Crop Suggestions",
-    "fertilizerRecommendations": "Fertilizer Recommendations",
-    "marketPrices": "Market Prices"
+    "viewAll": "View All",
+    "viewAllSuggestions": "View All Suggestions",
+    "viewAllMarkets": "View All Markets",
+    "viewAllFertilizers": "View All Fertilizers",
+    "fertilizerDetails": "Fertilizer Details:",
+    "uploadPlantPhoto": "Upload plant photo",
+    "dropImageHere": "Drop the image here",
+    "uploadedPlant": "Uploaded plant",
+    "predicted": "Predicted",
+    "actual": "Actual",
+    "setPriceAlert": "Set Price Alert",
+    "dragDropSelect": "Drag & drop or click to select (JPG, PNG, WebP)",
+    "maxFileSize": "Max file size: 5MB",
+    "plantingPeriod": "Planting Period",
+    "expectedPrice": "Expected Price",
+    "expectedYield": "Expected Yield",
+    "growthPeriod": "Growth Period",
+    "waterRequirement": "Water Requirement",
+    "soilCompatibility": "Soil Compatibility",
+    "keyBenefits": "Key Benefits",
+    "type": "Type",
+    "availability": "Availability",
+    "price": "Price",
+    "applicationPeriod": "Application Period",
+    "dosage": "Dosage",
+    "frequency": "Frequency",
+    "currentPrice": "Current Price",
+    "priceChange": "Price Change",
+    "location": "Location",
+    "lastUpdated": "Last Updated",
+    "priceTrend": "Price Trend (6 months)",
+    "perKg": "per kg",
+    "perAcre": "per acre",
+    "tonsPerAcre": "tons/acre",
+    "days": "days",
+    "weeks": "weeks",
+    "hoursAgo": "hours ago",
+    "highAvailability": "high availability",
+    "mediumAvailability": "medium availability",
+    "lowAvailability": "low availability",
+    "organic": "Organic",
+    "inorganic": "Inorganic",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "next6Months": "Next 6 months",
+    "beforePlantingDuringGrowth": "Before planting & during growth",
+    "every3to4Weeks": "Every 3-4 weeks",
+    "mumbaiApmc": "Mumbai APMC",
+    "delhiApmc": "Delhi APMC",
+    "kolkataApmc": "Kolkata APMC",
+    "2HoursAgo": "2 hours ago",
+    "1HourAgo": "1 hour ago",
+    "3HoursAgo": "3 hours ago",
+    "4HoursAgo": "4 hours ago",
+    "personalizedInsights": "Here's your personalized agriculture insights"
   },
   "common": {
     "loading": "Loading...",
@@ -39,6 +138,7 @@
     "success": "Success",
     "upload": "Upload",
     "select": "Select",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "farmer": "Farmer"
   }
 }

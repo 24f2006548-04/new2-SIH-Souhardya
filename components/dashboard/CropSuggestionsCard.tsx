@@ -119,7 +119,7 @@ export default function CropSuggestionsCard() {
           <Sprout className="h-6 w-6 text-green-600" />
         </div>
         <h3 className="text-lg font-semibold text-gray-900 ml-3">
-          {t('dashboard.cropSuggestions')}
+          {t('features.cropSuggestions.title')}
         </h3>
       </div>
 
@@ -149,15 +149,15 @@ export default function CropSuggestionsCard() {
 
             <div className="mb-3">
               <div className="flex items-center justify-between text-sm mb-1">
-                <span className="text-gray-600">Expected Yield</span>
+                <span className="text-gray-600">{t('dashboard.expectedYield')}</span>
                 <span className="font-medium text-gray-900">{crop.expectedYield}</span>
               </div>
               <div className="flex items-center justify-between text-sm mb-1">
-                <span className="text-gray-600">Growth Period</span>
+                <span className="text-gray-600">{t('dashboard.growthPeriod')}</span>
                 <span className="font-medium text-gray-900">{crop.growthPeriod}</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">Water Requirement</span>
+                <span className="text-gray-600">{t('dashboard.waterRequirement')}</span>
                 <span className={`px-2 py-1 rounded-full text-xs font-medium ${getWaterRequirementColor(crop.waterRequirement)}`}>
                   {crop.waterRequirement}
                 </span>
@@ -165,7 +165,7 @@ export default function CropSuggestionsCard() {
             </div>
 
             <div className="mb-3">
-              <p className="text-sm text-gray-600 mb-1">Soil Compatibility:</p>
+              <p className="text-sm text-gray-600 mb-1">{t('dashboard.soilCompatibility')}:</p>
               <div className="flex flex-wrap gap-1">
                 {crop.soilCompatibility.map((soil, index) => (
                   <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
@@ -176,7 +176,7 @@ export default function CropSuggestionsCard() {
             </div>
 
             <div>
-              <p className="text-sm text-gray-600 mb-1">Key Benefits:</p>
+              <p className="text-sm text-gray-600 mb-1">{t('dashboard.keyBenefits')}:</p>
               <ul className="text-xs text-gray-600 space-y-1">
                 {crop.benefits.map((benefit, index) => (
                   <li key={index} className="flex items-start">
@@ -192,7 +192,7 @@ export default function CropSuggestionsCard() {
 
       <div className="mt-4 pt-4 border-t border-gray-200">
         <button className="w-full btn-primary text-sm">
-          View All Suggestions
+          {t('dashboard.viewAllSuggestions')}
         </button>
       </div>
     </div>

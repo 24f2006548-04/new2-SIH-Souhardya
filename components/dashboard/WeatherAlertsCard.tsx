@@ -50,14 +50,14 @@ export default function WeatherAlertsCard() {
           type: 'warning',
           title: 'Heavy Rain Expected',
           description: 'Heavy rainfall expected in the next 24 hours. Consider delaying irrigation.',
-          time: '2 hours ago'
+          time: t('dashboard.2HoursAgo')
         },
         {
           id: '2',
           type: 'info',
           title: 'Temperature Drop',
           description: 'Temperature will drop to 15°C tonight. Protect sensitive crops.',
-          time: '4 hours ago'
+          time: t('dashboard.4HoursAgo')
         }
       ],
       forecast: [
@@ -69,7 +69,6 @@ export default function WeatherAlertsCard() {
       ]
     }
     
-    setWeatherData(fallbackData)
     setIsLoading(false)
     
     // Optional: Fetch real data in background
@@ -135,98 +134,35 @@ export default function WeatherAlertsCard() {
         </h3>
       </div>
 
-      {weatherData && (
-        <div className="space-y-6">
-          {/* Current Weather */}
-          <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center">
-                {getWeatherIcon(weatherData.current.condition)}
-                <span className="ml-2 font-medium text-gray-900">
-                  {weatherData.current.condition}
-                </span>
-              </div>
-              <span className="text-2xl font-bold text-gray-900">
-                {weatherData.current.temperature}°C
-              </span>
-            </div>
-            
-            <div className="grid grid-cols-3 gap-4 text-sm">
-              <div className="flex items-center">
-                <Droplets className="h-4 w-4 text-blue-500 mr-1" />
-                <span className="text-gray-600">{weatherData.current.humidity}%</span>
-              </div>
-              <div className="flex items-center">
-                <Wind className="h-4 w-4 text-gray-500 mr-1" />
-                <span className="text-gray-600">{weatherData.current.windSpeed} km/h</span>
-              </div>
-              <div className="flex items-center">
-                <Thermometer className="h-4 w-4 text-red-500 mr-1" />
-                <span className="text-gray-600">Feels like {weatherData.current.temperature + 2}°C</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Alerts */}
-          {weatherData.alerts.length > 0 && (
-            <div>
-              <h4 className="font-medium text-gray-900 mb-3">Active Alerts</h4>
-              <div className="space-y-2">
-                {weatherData.alerts.map((alert) => (
-                  <div
-                    key={alert.id}
-                    className={`border rounded-lg p-3 ${getAlertColor(alert.type)}`}
-                  >
-                    <div className="flex items-start">
-                      {getAlertIcon(alert.type)}
-                      <div className="ml-2 flex-1">
-                        <h5 className="font-medium text-gray-900 text-sm">
-                          {alert.title}
-                        </h5>
-                        <p className="text-xs text-gray-600 mt-1">
-                          {alert.description}
-                        </p>
-                        <p className="text-xs text-gray-500 mt-1">
-                          {alert.time}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* 5-Day Forecast */}
-          <div>
-            <h4 className="font-medium text-gray-900 mb-3">5-Day Forecast</h4>
-            <div className="space-y-2">
-              {weatherData.forecast.map((day, index) => (
-                <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-b-0">
-                  <div className="flex items-center">
-                    {getWeatherIcon(day.condition)}
-                    <span className="ml-2 text-sm font-medium text-gray-900">
-                      {day.day}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <span className="text-sm text-gray-600">
-                      {day.precipitation}%
-                    </span>
-                    <div className="flex items-center space-x-1">
-                      <span className="text-sm font-medium text-gray-900">
-                        {day.high}°
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {day.low}°
-                      </span>
-                    </div>
+      {weatherData && weatherData.alerts.length > 0 ? (
+        <div>
+          <h4 className="font-medium text-gray-900 mb-3">Active Alerts</h4>
+          <div className="space-y-2">
+            {weatherData.alerts.map((alert) => (
+              <div
+                key={alert.id}
+                className={`border rounded-lg p-3 ${getAlertColor(alert.type)}`}
+              >
+                <div className="flex items-start">
+                  {getAlertIcon(alert.type)}
+                  <div className="ml-2 flex-1">
+                    <h5 className="font-medium text-gray-900 text-sm">
+                      {alert.title}
+                    </h5>
+                    <p className="text-xs text-gray-600 mt-1">
+                      {alert.description}
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {alert.time}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
+      ) : (
+        <div className="text-gray-500">No active weather alerts.</div>
       )}
     </div>
   )

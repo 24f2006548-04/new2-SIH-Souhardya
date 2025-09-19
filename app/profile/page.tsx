@@ -157,7 +157,7 @@ export default function ProfilePage(): ReactElement {
       await onSaveProfile(profile)
     } catch (error) {
       console.error('Error saving profile:', error)
-      showError('Error saving profile. Please try again.')
+      showError(t('profile.errorSaving'))
     } finally {
       setIsLoading(false)
     }
@@ -196,20 +196,20 @@ export default function ProfilePage(): ReactElement {
             >
               <div className="flex items-center mb-6">
                 <User className="h-5 w-5 text-primary-600 mr-2" />
-                <h2 className="text-xl font-semibold text-gray-900">Personal Information</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t('profile.personalInfo')}</h2>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="label">
-                    Name
+                    {t('profile.name')}
                   </label>
                   <input
                     type="text"
                     value={profile.name || ''}
                     onChange={(e) => handleInputChange('name', e.target.value)}
                     className="input-field"
-                    placeholder="Enter your name"
+                    placeholder={t('profile.enterName')}
                   />
                 </div>
               </div>
@@ -223,7 +223,7 @@ export default function ProfilePage(): ReactElement {
             >
               <div className="flex items-center mb-6">
                 <MapPin className="h-5 w-5 text-primary-600 mr-2" />
-                <h2 className="text-xl font-semibold text-gray-900">Location Information</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t('profile.locationInfo')}</h2>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -238,13 +238,13 @@ export default function ProfilePage(): ReactElement {
                     required
                     aria-describedby="state-help"
                   >
-                    <option value="">Select State</option>
+                    <option value="">{t('profile.selectState')}</option>
                     {states.map(state => (
                       <option key={state} value={state}>{state}</option>
                     ))}
                   </select>
                   <p id="state-help" className="text-sm text-gray-500 mt-1">
-                    Select your state for localized recommendations
+                    {t('profile.selectStateHelp')}
                   </p>
                 </div>
 
@@ -257,7 +257,7 @@ export default function ProfilePage(): ReactElement {
                     value={profile.district}
                     onChange={(e) => handleInputChange('district', e.target.value)}
                     className="input-field"
-                    placeholder="Enter your district"
+                    placeholder={t('profile.enterDistrict')}
                     required
                   />
                 </div>
@@ -285,7 +285,7 @@ export default function ProfilePage(): ReactElement {
                     value={profile.farmSize}
                     onChange={(e) => handleInputChange('farmSize', e.target.value)}
                     className="input-field"
-                    placeholder="Enter farm size in acres"
+                    placeholder={t('profile.enterFarmSize')}
                     min="0"
                     step="0.1"
                     required
@@ -302,7 +302,7 @@ export default function ProfilePage(): ReactElement {
                     className="input-field"
                     required
                   >
-                    <option value="">Select Soil Type</option>
+                    <option value="">{t('profile.selectSoilType')}</option>
                     {soilTypes.map(soil => (
                       <option key={soil} value={soil}>{soil}</option>
                     ))}
@@ -319,7 +319,7 @@ export default function ProfilePage(): ReactElement {
                     className="input-field"
                     required
                   >
-                    <option value="">Select Irrigation Type</option>
+                    <option value="">{t('profile.selectIrrigationType')}</option>
                     {irrigationTypes.map(type => (
                       <option key={type} value={type}>{type}</option>
                     ))}
@@ -336,12 +336,12 @@ export default function ProfilePage(): ReactElement {
             >
               <div className="flex items-center mb-6">
                 <Droplets className="h-5 w-5 text-primary-600 mr-2" />
-                <h2 className="text-xl font-semibold text-gray-900">Crop Selection</h2>
+                <h2 className="text-xl font-semibold text-gray-900">{t('profile.cropSelection')}</h2>
               </div>
               
               <div>
                 <label className="label">
-                  Crops You Grow
+{t('profile.cropsYouGrow')}
                 </label>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                   {commonCrops.map(crop => (
@@ -357,7 +357,7 @@ export default function ProfilePage(): ReactElement {
                   ))}
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
-                  Select all crops you currently grow or plan to grow
+                  {t('profile.selectCropsHelp')}
                 </p>
               </div>
             </motion.div>
@@ -391,7 +391,7 @@ export default function ProfilePage(): ReactElement {
                   ))}
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
-                  Select all languages you're comfortable with for better recommendations
+                  {t('profile.selectLanguagesHelp')}
                 </p>
               </div>
             </motion.div>

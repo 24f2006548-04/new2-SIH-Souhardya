@@ -88,7 +88,7 @@ export default function PestDiseaseCard() {
           <Camera className="h-6 w-6 text-orange-600" />
         </div>
         <h3 className="text-lg font-semibold text-gray-900 ml-3">
-          {t('dashboard.pestDisease')}
+          {t('features.pestDetection.title')}
         </h3>
       </div>
 
@@ -104,13 +104,13 @@ export default function PestDiseaseCard() {
           <input {...getInputProps()} />
           <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
           <p className="text-lg font-medium text-gray-900 mb-2">
-            {isDragActive ? 'Drop the image here' : 'Upload plant photo'}
+            {isDragActive ? t('dashboard.dropImageHere') : t('dashboard.uploadPlantPhoto')}
           </p>
           <p className="text-sm text-gray-500">
-            Drag & drop or click to select (JPG, PNG, WebP)
+            {t('dashboard.dragDropSelect')}
           </p>
           <p className="text-xs text-gray-400 mt-2">
-            Max file size: 5MB
+            {t('dashboard.maxFileSize')}
           </p>
         </div>
       ) : (
@@ -119,7 +119,7 @@ export default function PestDiseaseCard() {
           <div className="relative">
             <img
               src={uploadedImage}
-              alt="Uploaded plant"
+              alt={t('dashboard.uploadedPlant')}
               className="w-full h-48 object-cover rounded-lg"
             />
             {isAnalyzing && (

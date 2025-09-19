@@ -34,9 +34,9 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
         id: '1',
         name: 'NPK 19:19:19',
         type: 'inorganic',
-        applicationTime: 'Before planting & during growth',
+        applicationTime: t('dashboard.beforePlantingDuringGrowth'),
         quantity: '50-75 kg/acre',
-        frequency: 'Every 3-4 weeks',
+        frequency: t('dashboard.every3to4Weeks'),
         benefits: ['Balanced nutrition', 'Quick absorption', 'High yield'],
         price: 25,
         availability: 'high',
@@ -113,19 +113,19 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
         <p><strong>Types:</strong> Straight (single nutrient), Complex (multi), Organic vs Inorganic.</p>
         
         <div className="bg-gray-50 p-4 rounded-lg">
-          <h4 className="font-semibold mb-2">Fertilizer Details:</h4>
+          <h4 className="font-semibold mb-2">{t('dashboard.fertilizerDetails')}</h4>
           <div className="space-y-2 text-sm">
             <p><strong>Name:</strong> {fertilizer.name}</p>
-            <p><strong>Type:</strong> {fertilizer.type}</p>
-            <p><strong>Price:</strong> ₹{fertilizer.price} per kg</p>
-            <p><strong>Application Time:</strong> {fertilizer.applicationTime}</p>
-            <p><strong>Quantity:</strong> {fertilizer.quantity}</p>
-            <p><strong>Frequency:</strong> {fertilizer.frequency}</p>
+            <p><strong>{t('dashboard.type')}:</strong> {fertilizer.type}</p>
+            <p><strong>{t('dashboard.price')}:</strong> ₹{fertilizer.price} {t('dashboard.perKg')}</p>
+            <p><strong>{t('dashboard.applicationPeriod')}:</strong> {fertilizer.applicationTime}</p>
+            <p><strong>{t('dashboard.dosage')}:</strong> {fertilizer.quantity}</p>
+            <p><strong>{t('dashboard.frequency')}:</strong> {fertilizer.frequency}</p>
           </div>
         </div>
 
         <div className="bg-blue-50 p-4 rounded-lg">
-          <h4 className="font-semibold mb-2">Key Benefits:</h4>
+          <h4 className="font-semibold mb-2">{t('dashboard.keyBenefits')}:</h4>
           <ul className="space-y-1 text-sm">
             {fertilizer.benefits.map((benefit, index) => (
               <li key={index} className="flex items-start">
@@ -137,7 +137,7 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
         </div>
 
         <div className="bg-yellow-50 p-4 rounded-lg">
-          <h4 className="font-semibold mb-2">Soil Compatibility:</h4>
+          <h4 className="font-semibold mb-2">{t('dashboard.soilCompatibility')}:</h4>
           <div className="flex flex-wrap gap-2">
             {fertilizer.soilCompatibility.map((soil, index) => (
               <span key={index} className="px-2 py-1 bg-white text-gray-700 text-xs rounded border">
@@ -185,7 +185,7 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
           <Beaker className="h-6 w-6 text-purple-600" />
         </div>
         <h3 className="text-lg font-semibold text-gray-900 ml-3">
-          {t('dashboard.fertilizerRecommendations')}
+          {t('features.fertilizerGuide.title')}
         </h3>
       </div>
 
@@ -200,7 +200,7 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
                     {fertilizer.type.toUpperCase()}
                   </span>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAvailabilityColor(fertilizer.availability)}`}>
-                    {fertilizer.availability} availability
+                    {fertilizer.availability === 'high' ? t('dashboard.highAvailability') : fertilizer.availability === 'medium' ? t('dashboard.mediumAvailability') : t('dashboard.lowAvailability')}
                   </span>
                 </div>
               </div>
@@ -226,7 +226,7 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
             </div>
 
             <div className="mb-3">
-              <p className="text-sm text-gray-600 mb-1">Key Benefits:</p>
+              <p className="text-sm text-gray-600 mb-1">{t('dashboard.keyBenefits')}:</p>
               <ul className="text-xs text-gray-600 space-y-1">
                 {fertilizer.benefits.map((benefit, index) => (
                   <li key={index} className="flex items-start">
@@ -238,7 +238,7 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
             </div>
 
             <div className="mb-3">
-              <p className="text-sm text-gray-600 mb-1">Soil Compatibility:</p>
+              <p className="text-sm text-gray-600 mb-1">{t('dashboard.soilCompatibility')}:</p>
               <div className="flex flex-wrap gap-1">
                 {fertilizer.soilCompatibility.map((soil, index) => (
                   <span key={index} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
@@ -257,7 +257,7 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
                 data-product-id={fertilizer.id}
                 onClick={() => handleViewDetails(fertilizer)}
               >
-                View Details
+{t('common.viewDetails')}
               </button>
             </div>
           </div>
@@ -266,7 +266,7 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
 
       <div className="mt-4 pt-4 border-t border-gray-200">
         <button className="w-full btn-secondary text-sm">
-          View All Fertilizers
+          {t('dashboard.viewAllFertilizers')}
         </button>
       </div>
     </div>
