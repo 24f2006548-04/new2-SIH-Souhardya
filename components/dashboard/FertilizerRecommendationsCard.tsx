@@ -68,7 +68,6 @@ export default function FertilizerRecommendationsCard({ onOpenModal }: Fertilize
       }
     ]
     
-    setRecommendations(fallbackData)
     setIsLoading(false)
     
     // Optional: Fetch real data in background
