@@ -68,7 +68,7 @@ export default function WeatherAlertsCard() {
         { day: 'Fri', high: 33, low: 19, condition: 'Partly Cloudy', precipitation: 10 }
       ]
     }
-    
+    setWeatherData(fallbackData)
     setIsLoading(false)
     
     // Optional: Fetch real data in background
